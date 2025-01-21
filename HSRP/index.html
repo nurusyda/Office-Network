@@ -191,9 +191,9 @@ Below is the test result table for the ping command. The notation ✅ indicates 
 </p>
 <table border="1" style="border-collapse: collapse; text-align: left;">
     <tr>
-        <th>Router Internet (RINT)</th>
-        <th>Router Edge A (R1A)</th>
-        <th>Router Edge B (R1B)</th>
+        <th>Internet Router (RINT)</th>
+        <th>Edge Router A (R1A)</th>
+        <th>Edge Router B (R1B)</th>
     </tr>
     <tr>
         <td>
@@ -222,7 +222,7 @@ Below is the test result table for the ping command. The notation ✅ indicates 
 </table>
 
     <h3>Correcting Ping Issues for 10.1.1.0 and 8.8.8.8</h3>
-    <h4>Router Internet (RINT)</h4>
+    <h4>Internet Router (RINT)</h4>
     <p>RINT must:</p>
     <ol>
         <li>Route traffic to R1A’s and R1B’s networks.</li>
@@ -248,7 +248,7 @@ ip route 10.1.1.0 255.255.255.0 203.0.113.2
 ip route 10.1.1.0 255.255.255.0 198.51.100.2
     </pre>
 
-    <h4>Router Edge A (R1A)</h4>
+    <h4>Edge Router A (R1A)</h4>
     <p>R1A must:</p>
     <ol>
         <li>Route traffic destined for the server (`8.8.8.8`) to RINT.</li>
@@ -268,7 +268,7 @@ interface GigabitEthernet0/1
 ip route 8.8.8.0 255.255.255.0 203.0.113.1
     </pre>
 
-        <h4>Router Edge B (R1B)</h4>
+        <h4>Edge Router B (R1B)</h4>
     <p>R1B must:</p>
     <ol>
         <li>Route traffic destined for the server (`8.8.8.8`) to RINT.</li>
@@ -304,7 +304,7 @@ end
     </pre>        
     
     <h2 class="underline">Hot Standby Router Protocol (HSRP)</h2>
-    <h3>Router Edge A (R1A)</h3>
+    <h3>Edge Router A (R1A)</h3>
     <pre>
 Router(config)#interface GigabitEthernet0/1
 Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
@@ -312,7 +312,7 @@ Router(config-if)#standby 1 priority 110     # Set priority (higher than default
 Router(config-if)#standby 1 preempt          # Enable preemption
     </pre>
     <img src="images/HSRP-R1A.png" alt="HSRP Failover Status">    
-    <h3>Router Edge B (R1B)</h3>
+    <h3>Edge Router B (R1B)</h3>
     <pre>
 Router(config)#interface GigabitEthernet0/1
 Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
