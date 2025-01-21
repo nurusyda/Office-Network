@@ -126,17 +126,17 @@
     <span class="icon">⬅️</span> Previous Page
 </a>
             <h1 class="underline">Hot Standby Router Protocol (HSRP) in Edge Router</h1>
-        <h2>Network Topology</h2>
+        <h2 class="underline">Network Topology</h2>
     <img src="path/to/image1.png" alt="Topology Diagram">
 
-    <h2>The network consists of:</h2>
+    <h2 class="underline">Network Overview</h2>
     <ul>
         <li>3 Router (Cisco 2911)</li>
         <li>1 Switch (Cisco 2960-24TT)</li>
         <li>1 Internet Server (Server-PT)</li>
     </ul>
 
-    <h2>Server Configuration</h2>
+    <h2 class="underline">Server Configuration</h2>
     <ul>
         <li>Default Gateway: 8.8.8.1 (use the other side of the primary router).</li>
         <li>IPv4 Address: 8.8.8.8</li>
@@ -185,7 +185,7 @@
         </tr>
     </table>
 
-    <h2>Testing</h2>
+    <h2 class="underline">Testing</h2>
 <p>
 Below is the test result table for the ping command. The notation ✅ indicates a successful ping (connection works), while ❌ indicates a failed ping (connection does not work).
 </p>
@@ -303,7 +303,7 @@ ip name-server 8.8.8.8
 end
     </pre>        
     
-    <h3>Hot Standby Router Protocol (HSRP)</h3>
+    <h2 class="underline">Hot Standby Router Protocol (HSRP)</h2>
     <h4>Router Edge A (R1A)</h4>
     <pre>
 Router(config)#interface GigabitEthernet0/1
