@@ -304,7 +304,7 @@ end
     </pre>        
     
     <h2 class="underline">Hot Standby Router Protocol (HSRP)</h2>
-    <h4>Router Edge A (R1A)</h4>
+    <h3>Router Edge A (R1A)</h3>
     <pre>
 Router(config)#interface GigabitEthernet0/1
 Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
@@ -312,7 +312,7 @@ Router(config-if)#standby 1 priority 110     # Set priority (higher than default
 Router(config-if)#standby 1 preempt          # Enable preemption
     </pre>
     <img src="path/to/R1A.png" alt="HSRP Failover Status">    
-    <h4>Router Edge B (R1B)</h4>
+    <h3>Router Edge B (R1B)</h3>
     <pre>
 Router(config)#interface GigabitEthernet0/1
 Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
@@ -320,7 +320,7 @@ Router(config-if)#standby 1 priority 90      # Set priority (lower than default)
 Router(config-if)#standby 1 preempt          # Enable preemption
     </pre>
     <img src="path/to/R1B.png" alt="HSRP Failover Status">    
-    <h4>HSRP Status Check</h4>
+    <h3>HSRP Status Check</h3>
     <pre>
 show standby brief 
 show standby GigabitEthernet0/1
