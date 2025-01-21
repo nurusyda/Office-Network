@@ -88,30 +88,41 @@
     border-bottom: 0.5px solid #eaecef; /* Adds a line below */
     padding-bottom: 5px; /* Adds spacing between text and line */
     margin-bottom: 15px; /* Adds space below the line */
-               }
-           .home-button {
+    .nav-button {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 16px;
+        padding: 10px 20px;
         background-color: #f8f9f9;
         border: 1px solid #ddd;
         border-radius: 4px;
         color: #0366d6;
         text-decoration: none;
         font-weight: 500;
+        font-size: 16px;
+        transition: background-color 0.2s ease;
         margin-bottom: 20px;
     }
-
-    .home-button:hover {
+    
+    .nav-button:hover {
         background-color: #f1f1f1;
         text-decoration: none;
+    }
+    
+    .icon {
+        font-size: 18px; /* Adjust the size of the icons */
     }
       </style>
 </head>
 <body>
-    <a href="../index.html" class="home-button">
-    ← Back to Main Page
+<!-- Back to Main Page -->
+<a href="/index.html" class="nav-button">
+    <span class="icon">🏠</span> Main Page
+</a>
+
+<!-- Back to Previous Page -->
+<a href="../index.html" class="nav-button">
+    <span class="icon">⬅️</span> Previous Page
 </a>
             <h1 class="underline">Office Network: VLAN, Port Security, AAA, RADIUS, and Network Monitoring</h1>
 </body>
