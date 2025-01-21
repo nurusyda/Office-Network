@@ -126,4 +126,141 @@
     <span class="icon">⬅️</span> Previous Page
 </a>
             <h1 class="underline">Hot Standby Router Protocol (HSRP) in Edge Router</h1>
+    <h2>Topography</h2>
+    <img src="path/to/image1.png" alt="Topography Diagram">
+
+    <h2>Tools</h2>
+    <ul>
+        <li>Router 2911 (3)</li>
+        <li>Switch 2960-24TT (1)</li>
+        <li>Server-PT (1)</li>
+    </ul>
+
+    <h2>Server</h2>
+    <ul>
+        <li>Default Gateway: 8.8.8.1 (Use the other side of the primary router!)</li>
+        <li>IPv4: 8.8.8.8</li>
+        <li>Subnet: 255.255.255.0</li>
+        <li>DNS: On</li>
+        <li>DNS Name and Address: cisco.com, 8.8.8.8</li>
+    </ul>
+
+    <h2>IP Addressing</h2>
+    <table>
+        <tr>
+            <th>Interface</th>
+            <th>IP Address</th>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/0 (RINT)</td>
+            <td>203.0.113.1/24</td>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/0 (R1A)</td>
+            <td>203.0.113.2/24</td>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/1 (RINT)</td>
+            <td>198.51.100.1/24</td>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/0 (R1B)</td>
+            <td>198.51.100.2/24</td>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/2 (RINT)</td>
+            <td>8.8.8.1/24</td>
+        </tr>
+        <tr>
+            <td>FastEthernet0 (Internet Server)</td>
+            <td>8.8.8.8/24</td>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/1 (TSw)</td>
+            <td>10.1.1.1/24</td>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/1 (R1A)</td>
+            <td>10.1.1.1/24</td>
+        </tr>
+        <tr>
+            <td>GigabitEthernet0/2 (TSw)</td>
+            <td>10.1.1.2/24</td>
+        </tr>
+    </table>
+
+    <h2>Testing</h2>
+    <table>
+        <tr>
+            <th>Router Internet (RINT)</th>
+            <th>Router Edge A (R1A)</th>
+            <th>Router Edge B (R1B)</th>
+        </tr>
+        <tr>
+            <td>
+                [x] Ping 8.8.8.8 <br>
+                [x] Ping 203.0.113.2<br>
+                [x] Ping 198.51.100.2<br>
+                [x] Ping cisco.com
+            </td>
+            <td>
+                [ ] Ping 8.8.8.8 <br>
+                [x] Ping 203.0.113.1<br>
+                [x] Ping 10.1.1.1<br>
+                [x] Ping 10.1.1.2<br>
+                [ ] Ping cisco.com
+            </td>
+            <td>
+                [ ] Ping 8.8.8.8 <br>
+                [x] Ping 198.51.100.1<br>
+                [x] Ping 10.1.1.1<br>
+                [x] Ping 10.1.1.2<br>
+                [ ] Ping cisco.com
+            </td>
+        </tr>
+    </table>
+
+    <h3>Correct Ping 10.1.1.0 and Ping 8.8.8.8 Connection</h3>
+    <h4>Router Internet (RINT)</h4>
+    <p>RINT must:</p>
+    <ol>
+        <li>Route traffic to R1A’s and R1B’s networks.</li>
+        <li>Serve as the default gateway for the Internet Server.</li>
+    </ol>
+    <h5>Interface</h5>
+    <pre>
+interface GigabitEthernet0/0
+ ip address 203.0.113.1 255.255.255.0
+ no shutdown
+
+interface GigabitEthernet0/1
+ ip address 198.51.100.1 255.255.255.0
+ no shutdown
+ 
+interface GigabitEthernet0/2
+ ip address 8.8.8.1 255.255.255.0
+ no shutdown
+    </pre>
+    <h5>Static Route</h5>
+    <pre>
+ip route 10.1.1.0 255.255.255.0 203.0.113.2
+ip route 10.1.1.0 255.255.255.0 198.51.100.2
+    </pre>
+
+    <h3>HSRP</h3>
+    <pre>
+Router(config)#interface GigabitEthernet0/1
+Router(config-if)#ip address 10.1.1.2 255.255.255.0
+Router(config-if)#standby 1 ip 10.1.1.1      # Virtual IP address
+Router(config-if)#standby 1 priority 110     # Set priority (higher than default)
+Router(config-if)#standby 1 preempt          # Enable preemption
+    </pre>
+
+    <h4>HSRP Status Check</h4>
+    <pre>
+show standby brief 
+show standby GigabitEthernet0/1
+    </pre>
+    <img src="path/to/failover-status.png" alt="HSRP Failover Status">
 </body>
+</html>
