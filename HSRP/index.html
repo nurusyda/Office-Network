@@ -176,15 +176,11 @@
             <td>8.8.8.8/24</td>
         </tr>
         <tr>
-            <td>GigabitEthernet0/1 (TSw)</td>
-            <td>10.1.1.1/24</td>
-        </tr>
-        <tr>
             <td>GigabitEthernet0/1 (R1A)</td>
             <td>10.1.1.1/24</td>
         </tr>
         <tr>
-            <td>GigabitEthernet0/2 (TSw)</td>
+            <td>GigabitEthernet0/1 (R1B)</td>
             <td>10.1.1.2/24</td>
         </tr>
     </table>
@@ -204,6 +200,8 @@ Below is the test result table for the ping command. The notation ✅ indicates 
             ✅ Ping 8.8.8.8 <br>
             ✅ Ping 203.0.113.2<br>
             ✅ Ping 198.51.100.2<br>
+            ❌ Ping 10.1.1.1<br>
+            ❌ Ping 10.1.1.2<br>
             ✅ Ping cisco.com
         </td>
         <td>
@@ -250,15 +248,78 @@ ip route 10.1.1.0 255.255.255.0 203.0.113.2
 ip route 10.1.1.0 255.255.255.0 198.51.100.2
     </pre>
 
+    <h4>Router Edge A (R1A)</h4>
+    <p>R1A must:</p>
+    <ol>
+        <li>Route traffic destined for the server (`8.8.8.8`) to RINT.</li>
+    </ol>
+    <h5>Interface Configuration</h5>
+    <pre>
+interface GigabitEthernet0/0
+ ip address 203.0.113.2 255.255.255.0
+ no shutdown
+
+interface GigabitEthernet0/1
+ ip address 10.1.1.1 255.255.255.0
+ no shutdown
+    </pre>
+    <h5>Static Route Configuration</h5>
+    <pre>
+ip route 8.8.8.0 255.255.255.0 203.0.113.1
+    </pre>
+
+        <h4>Router Edge B (R1B)</h4>
+    <p>R1B must:</p>
+    <ol>
+        <li>Route traffic destined for the server (`8.8.8.8`) to RINT.</li>
+    </ol>
+    <h5>Interface Configuration</h5>
+    <pre>
+interface GigabitEthernet0/0
+ ip address 198.51.100.2 255.255.255.0
+ no shutdown
+
+interface GigabitEthernet0/1
+ ip address 10.1.1.2 255.255.255.0
+ no shutdown
+    </pre>
+    <h5>Static Route Configuration</h5>
+    <pre>
+ip route 8.8.8.0 255.255.255.0 198.51.100.1
+    </pre>
+
+    <h3>Correcting Ping cisco.com Issue</h3>
+    <p>Verify the DNS Configuration in every router:</p>
+    <pre>
+show running-config | include ip name-server
+    </pre>
+    <p>You should see something like:</p>
+    <pre>
+ip name-server 8.8.8.8
+    </pre>   
+    <p>If not, set the DNS server:</p>
+    <pre>
+ip name-server 8.8.8.8
+end
+    </pre>        
+    
     <h3>Hot Standby Router Protocol (HSRP)</h3>
+    <h4>Router Edge A (R1A)</h4>
     <pre>
 Router(config)#interface GigabitEthernet0/1
-Router(config-if)#ip address 10.1.1.2 255.255.255.0
-Router(config-if)#standby 1 ip 10.1.1.1      # Virtual IP address
+Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
 Router(config-if)#standby 1 priority 110     # Set priority (higher than default)
 Router(config-if)#standby 1 preempt          # Enable preemption
     </pre>
-
+    <img src="path/to/R1A.png" alt="HSRP Failover Status">    
+    <h4>Router Edge B (R1B)</h4>
+    <pre>
+Router(config)#interface GigabitEthernet0/1
+Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
+Router(config-if)#standby 1 priority 90      # Set priority (higher than default)
+Router(config-if)#standby 1 preempt          # Enable preemption
+    </pre>
+    <img src="path/to/R1B.png" alt="HSRP Failover Status">    
     <h4>HSRP Status Check</h4>
     <pre>
 show standby brief 
