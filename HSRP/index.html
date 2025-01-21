@@ -127,7 +127,7 @@
 </a>
             <h1 class="underline">Hot Standby Router Protocol (HSRP) in Edge Router</h1>
         <h2 class="underline">Network Topology</h2>
-    <img src="path/to/image1.png" alt="Topology Diagram">
+    <img src="HSRP/images/Topology.png" alt="Topology Diagram">
 
     <h2 class="underline">Network Overview</h2>
     <ul>
@@ -311,7 +311,7 @@ Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
 Router(config-if)#standby 1 priority 110     # Set priority (higher than default)
 Router(config-if)#standby 1 preempt          # Enable preemption
     </pre>
-    <img src="path/to/R1A.png" alt="HSRP Failover Status">    
+    <img src="HSRP/images/HSRP-R1A.png" alt="HSRP Failover Status">    
     <h3>Router Edge B (R1B)</h3>
     <pre>
 Router(config)#interface GigabitEthernet0/1
@@ -319,14 +319,17 @@ Router(config-if)#standby 1 ip 10.1.1.254    # Virtual IP address
 Router(config-if)#standby 1 priority 90      # Set priority (lower than default)
 Router(config-if)#standby 1 preempt          # Enable preemption
     </pre>
-    <img src="path/to/R1B.png" alt="HSRP Failover Status">    
+    <img src="HSRP/images/HSRP-R1B.png" alt="HSRP Failover Status">    
     <h3>HSRP Status Check</h3>
     <pre>
 show standby brief 
 show standby GigabitEthernet0/1
     </pre>
-    <img src="path/to/failover-status.png" alt="HSRP Failover Status">
+    <h4>HSRP R1A Status</h4>  
+    <img src="HSRP/images/HSRP-StatusR1A.png" alt="HSRP Failover Status">
+    <h4>HSRP R1B Status</h4>  
+    <img src="HSRP/images/HSRP-StatusR1B.png" alt="HSRP Failover Status">
     <h4>Fail Over</h4>    
-    <img src="path/to/failover-status.png" alt="HSRP Failover Status">    
+    <img src="HSRP/images/HSRP-StatusFailOver.png" alt="HSRP Failover Status">    
 </body>
 </html>
