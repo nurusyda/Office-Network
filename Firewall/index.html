@@ -113,14 +113,6 @@
     .icon {
         font-size: 18px; /* Adjust the size of the icons */
     }
-    .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-     }
       </style>
 </head>
 <body>
@@ -133,26 +125,25 @@
 <a href="../index.html" class="nav-button">
     <span class="icon">⬅️</span> Previous Page
 </a>
-    <div class="container">
-        <h1>Network Configuration: PC Accessing cisco.com via DNS</h1>
-        <h2>Objective</h2>
-        <p>Configure a network where a PC can resolve and ping <code>cisco.com</code> through a multi-device setup (DNS, routers, ASA firewall, switch).</p>
-        
-        <h2>Network Topology</h2>
-        <img src="Pasted image 20250131113608.png" alt="Network Diagram">
-        
-        <h2>Device Configurations</h2>
-        <h3>DNS Server</h3>
-        <ul>
-            <li><strong>IPv4:</strong> 8.8.8.8/24</li>
-            <li><strong>Gateway:</strong> 8.8.8.1</li>
-            <li><strong>DNS:</strong> 8.8.8.8 (self)</li>
-            <li><strong>Hostname:</strong> cisco.com</li>
-        </ul>
-        
-        <h3>Router1</h3>
-        <pre>
-! Interface to DNS Server
+     <h1>Network Configuration: PC Accessing cisco.com via DNS</h1>
+    
+    <h2>Network Topology</h2>
+    <img src="Pasted image 20250131113608.png" alt="Network Topology">
+    <p><em>Devices:</em> DNS Server → Router1 → Router2 → ASA Firewall → Switch → PC</p>
+
+    <h2>Device Configurations</h2>
+    
+    <h3>DNS Server</h3>
+    <ul>
+        <li><strong>IPv4:</strong> 8.8.8.8/24</li>
+        <li><strong>Gateway:</strong> 8.8.8.1</li>
+        <li><strong>DNS:</strong> 8.8.8.8 (self)</li>
+        <li><strong>Hostname:</strong> cisco.com</li>
+    </ul>
+
+    <h3>Routers</h3>
+    <h4>Router1</h4>
+    <pre><code>! Interface to DNS Server
 interface GigabitEthernet0/0
  ip address 8.8.8.1 255.255.255.0
  no shutdown
@@ -166,12 +157,10 @@ interface GigabitEthernet0/1
 ip route 0.0.0.0 0.0.0.0 10.0.0.2
 
 ! DNS settings
-ip name-server 8.8.8.8
-        </pre>
-        
-        <h3>Router2</h3>
-        <pre>
-! Interface to Router1 (Outside NAT)
+ip name-server 8.8.8.8</code></pre>
+
+    <h4>Router2</h4>
+    <pre><code>! Interface to Router1 (Outside NAT)
 interface GigabitEthernet0/0
  ip address 10.0.0.2 255.255.255.0
  ip nat outside
@@ -188,12 +177,10 @@ access-list 1 permit 192.168.0.0 0.0.0.255
 ip nat inside source list 1 interface GigabitEthernet0/0 overload
 
 ! Route to ASA’s Internal Network
-ip route 192.168.1.0 255.255.255.0 192.168.0.2
-        </pre>
-        
-        <h3>ASA Firewall</h3>
-        <pre>
-! Outside Interface (to Router2)
+ip route 192.168.1.0 255.255.255.0 192.168.0.2</code></pre>
+
+    <h3>ASA Firewall</h3>
+    <pre><code>! Outside Interface (to Router2)
 interface GigabitEthernet1/1
  nameif outside
  ip address 192.168.0.2 255.255.255.0
@@ -215,35 +202,56 @@ access-list OUTSIDE_IN extended permit ip any any
 access-group OUTSIDE_IN in interface outside
 
 ! Default Route to Router2
-route outside 0.0.0.0 0.0.0.0 192.168.0.1
-        </pre>
-        
-        <h2>Validation & Testing</h2>
-        <h3>1. Successful DNS Resolution (nslookup)</h3>
-        <img src="nslookup-screenshot.png" alt="nslookup cisco.com">
-        
-        <h3>2. Ping to cisco.com</h3>
-        <img src="ping-screenshot.png" alt="ping cisco.com">
-        
-        <h2>Troubleshooting Tips</h2>
-        <ul>
-            <li><strong>PC Configuration:</strong> Is the gateway (192.168.1.1) reachable? Test with <code>ping 192.168.1.1</code>.</li>
-            <li><strong>ASA Firewall Rules:</strong> Are <code>INSIDE_OUT</code> and <code>OUTSIDE_IN</code> ACLs applied?</li>
-            <li><strong>Router2 NAT:</strong> Does <code>access-list 1</code> include the correct subnet (192.168.0.0/24)?</li>
-            <li><strong>Routing:</strong> Can Router2 reach the ASA’s outside IP (192.168.0.2)?</li>
-        </ul>
-        
-        <h2>Why This Works</h2>
-        <ul>
-            <li><strong>Correct NAT:</strong> Router2 only translates traffic from its directly connected inside network (192.168.0.0/24).</li>
-            <li><strong>Accurate Routing:</strong>
-                <ul>
-                    <li>Router2 sends 192.168.1.0/24 traffic to the ASA (192.168.0.2).</li>
-                    <li>The ASA’s default route points back to Router2 (192.168.0.1).</li>
-                </ul>
-            </li>
-            <li><strong>Permissive Firewall:</strong> The ASA allows all traffic for simplicity (adjust ACLs for production).</li>
-        </ul>
+route outside 0.0.0.0 0.0.0.0 192.168.0.1</code></pre>
+
+    <h3>Switch & PC</h3>
+    <h4>Switch (VLAN 10)</h4>
+    <pre><code>vlan 10
+ name PC_VLAN
+
+interface FastEthernet0/1
+ switchport access vlan 10
+ no shutdown
+
+interface GigabitEthernet0/1
+ switchport access vlan 10
+ no shutdown</code></pre>
+
+    <h4>PC Settings</h4>
+    <ul>
+        <li><strong>IPv4:</strong> 192.168.1.2/24</li>
+        <li><strong>Gateway:</strong> 192.168.1.1</li>
+        <li><strong>DNS:</strong> 8.8.8.8</li>
+    </ul>
+
+    <h2>Validation & Testing</h2>
+    <h3>1. Successful DNS Resolution (nslookup)</h3>
+    <img src="nslookup-screenshot.png" alt="nslookup Results">
+    <p class="screenshot-caption">The PC resolves cisco.com to its IP via the DNS server (8.8.8.8).</p>
+
+    <h3>2. Ping to cisco.com</h3>
+    <img src="ping-screenshot.png" alt="Ping Results">
+    <p class="screenshot-caption">Successful ping to cisco.com (4/4 packets received).</p>
+
+    <div class="note">
+        <strong>Note:</strong> Replace placeholder image URLs (<code>Pasted image 20250131113608.png</code>, 
+        <code>nslookup-screenshot.png</code>, <code>ping-screenshot.png</code>) with your actual image paths.
     </div>
+
+    <h2>Troubleshooting Tips</h2>
+    <ul>
+        <li>Verify PC connectivity to its gateway: <code>ping 192.168.1.1</code></li>
+        <li>Check NAT rules on Router2 with <code>show ip nat translations</code></li>
+        <li>Confirm ASA routes with <code>show route</code></li>
+        <li>Test DNS resolution from routers: <code>nslookup cisco.com 8.8.8.8</code></li>
+    </ul>
+
+    <h2>Why This Configuration Works</h2>
+    <ul>
+        <li>Router2 only NATs traffic from its directly connected network (192.168.0.0/24)</li>
+        <li>ASA firewall routes traffic back to Router2 via 192.168.0.1</li>
+        <li>Permissive ACLs allow traffic flow for testing purposes</li>
+        <li>End-to-end connectivity is validated with ping and nslookup</li>
+    </ul>
 </body>
 </html>
