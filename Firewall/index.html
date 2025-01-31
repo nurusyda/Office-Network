@@ -126,6 +126,11 @@
     <span class="icon">⬅️</span> Previous Page
 </a>
  <h1>ASA Firewall Configuration</h1>
+    <h2>Scope</h2>
+    <ul>
+    <li>NAT handled by Router2; ASA focuses on firewall inspection</li>
+    <li>DNS Server (8.8.8.8) simulates internet access</li>
+    </ul>
     
     <h2>Network Topology</h2>
     <img src="images/Topology.png" alt="Topology Diagram" width="800" height="150">
@@ -267,91 +272,5 @@ interface GigabitEthernet0/1
         <code>nslookup-screenshot.png</code>, <code>ping-screenshot.png</code>) with your actual image paths.
     </div>
 
-        <h2>Firewall Configuration Checklist</h2>
-    
-    <div class="checklist">
-        <h3>ASA Firewall Essential Checks</h3>
-        
-        <h4>1. Interface Verification</h4>
-        <pre><code>show interface
-show nameif</code></pre>
-        <ul>
-            <li>Confirm security levels (inside=100, outside=0)</li>
-            <li>Verify IP addresses match network topology</li>
-        </ul>
-
-        <h4>2. Access Control Lists (ACLs)</h4>
-        <pre><code>show access-list
-show access-group</code></pre>
-        <ul>
-            <li>Replace permissive rules with least privilege:
-                <pre><code>access-list INSIDE_OUT extended permit tcp 192.168.1.0 255.255.255.0 any eq 80
-access-list INSIDE_OUT extended permit tcp 192.168.1.0 255.255.255.0 any eq 443</code></pre>
-            </li>
-            <li>Ensure ACLs are applied to correct interfaces</li>
-        </ul>
-
-        <h4>3. NAT Configuration</h4>
-        <pre><code>show nat
-show xlate</code></pre>
-        <ul>
-            <li>Verify NAT overload is configured:
-                <pre><code>nat (inside,outside) source dynamic 192.168.1.0/24 interface</code></pre>
-            </li>
-            <li>Check for proper address translation</li>
-        </ul>
-
-        <h4>4. Routing Verification</h4>
-        <pre><code>show route
-ping outside 192.168.0.1</code></pre>
-        <ul>
-            <li>Confirm default route exists: 0.0.0.0/0 to 192.168.0.1</li>
-            <li>Test next-hop reachability</li>
-        </ul>
-
-        <h4>5. Security Policies</h4>
-        <pre><code>show running-config ssh
-show running-config http</code></pre>
-        <ul>
-            <li>Restrict management access:
-                <pre><code>ssh 192.168.1.0 255.255.255.0 inside
-http 192.168.1.0 255.255.255.0 inside</code></pre>
-            </li>
-            <li>Enable protocol inspection:
-                <pre><code>policy-map global_policy
- class inspection_default
-  inspect http
-  inspect dns</code></pre>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Update Troubleshooting Tips Section -->
-    <h2>Troubleshooting Tips</h2>
-    <div class="checklist">
-        <h3>Firewall-Specific Checks</h3>
-        <ul>
-            <li>Monitor live connections:
-                <pre><code>show conn</code></pre>
-            </li>
-            <li>Check ACL hit counts:
-                <pre><code>show access-list INSIDE_OUT</code></pre>
-            </li>
-            <li>Verify NAT translations:
-                <pre><code>show xlate detail</code></pre>
-            </li>
-            <li>Test with packet tracer:
-                <pre><code>packet-tracer input inside tcp 192.168.1.2 12345 8.8.8.8 53</code></pre>
-            </li>
-        </ul>
-    </div>
-
-    <h2>Troubleshooting Tips</h2>
-    <ul>
-        <li>Verify PC connectivity to its gateway: <code>ping 192.168.1.1</code></li>
-        <li>Check NAT rules on Router2 with <code>show ip nat translations</code></li>
-        <li>Confirm ASA routes with <code>show route</code></li>
-        <li>Test DNS resolution from routers: <code>nslookup cisco.com 8.8.8.8</code></li>
-    </ul>
 </body>
 </html>
