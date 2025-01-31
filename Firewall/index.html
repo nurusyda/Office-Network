@@ -125,14 +125,14 @@
 <a href="../index.html" class="nav-button">
     <span class="icon">⬅️</span> Previous Page
 </a>
- <h1>ASA Firewall Configuration</h1>
-    <h2>Scope</h2>
+ <h1 class="underline">ASA Firewall Configuration</h1>
+    <h2 class="underline">Scope</h2>
     <ul>
     <li>NAT handled by Router2; ASA focuses on firewall inspection</li>
     <li>DNS Server (8.8.8.8) simulates internet access</li>
     </ul>
     
-    <h2>Network Topology</h2>
+    <h2 class="underline">Network Topology</h2>
     <img src="images/Topology.png" alt="Topology Diagram" width="800" height="150">
 
     <h2>Device Configurations</h2>
@@ -258,19 +258,16 @@ interface GigabitEthernet0/1
         <li><strong>DNS:</strong> 8.8.8.8</li>
     </ul>
 
-    <h2>Validation & Testing</h2>
+    <h2 class="underline">Validation & Testing</h2>
     <h3>1. Successful DNS Resolution (nslookup)</h3>
-    <img src="nslookup-screenshot.png" alt="nslookup Results">
+    <img src="images/nslookup-PC.png" alt="nslookup Results" width="800" height="300">
     <p class="screenshot-caption">The PC resolves cisco.com to its IP via the DNS server (8.8.8.8).</p>
 
     <h3>2. Ping to cisco.com</h3>
-    <img src="ping-screenshot.png" alt="Ping Results">
+    <img src="images/DNS-Server-PC.png" alt="Ping Results" width="800" height="400">
     <p class="screenshot-caption">Successful ping to cisco.com (4/4 packets received).</p>
-
-    <div class="note">
-        <strong>Note:</strong> Replace placeholder image URLs (<code>Pasted image 20250131113608.png</code>, 
-        <code>nslookup-screenshot.png</code>, <code>ping-screenshot.png</code>) with your actual image paths.
-    </div>
-
+    <img src="images/DNS-Server.png" alt="cisco.com in Browser" width="800" height="400">
+    <p class="screenshot-caption">PC resolves and reaches cisco.com via the 8.8.8.8 DNS server.</p>
+    
 </body>
 </html>
