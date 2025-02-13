@@ -340,39 +340,51 @@ do wr
         </code></pre>
     </ol>
     <h2 class="underline">4. Subnetting and IP Addressing</h2>
-    <p><strong>&lt;table&gt; Subnetting Tables &lt;/table&gt;</strong></p>
 <table>
     <tr>
         <th>Category</th>
+        <th>VLAN</th>
         <th>Network & Subnet Mask</th>
         <th>Default Gateway</th>
     </tr>
     <tr>
-        <td>Management</td>
+        <td>Management (MGT)</td>
+        <td>10</td>
         <td>192.168.10.0/24</td>
         <td>192.168.0.1</td>
     </tr>
     <tr>
         <td>LAN</td>
+        <td>20</td>
         <td>172.16.0.0/16</td>
         <td>172.16.0.1</td>
     </tr>
     <tr>
         <td>WLAN</td>
+        <td>50</td>
         <td>10.20.0.0/16</td>
         <td>10.20.0.1</td>
     </tr>
     <tr>
+        <td>Voice IP (VoIP)</td>
+        <td>70</td>
+        <td>172.30.0.0/16</td>
+        <td>172.30.0.1</td>
+    </tr>
+    <tr>
         <td>DMZ</td>
+        <td>-</td>
         <td>10.11.11.0/27</td>
         <td>10.11.11.1</td>
     </tr>
     <tr>
         <td>Inside Servers</td>
+        <td>70</td>
         <td>10.11.11.32/27</td>
         <td>10.11.11.33</td>
     </tr>
 </table>
+    
     <h2 class="underline">5. HSRP, Inter-VLAN Routing, and IP DHCP Helper Address</h2>
     <p>diagram or screenshot showing HSRP configuration and inter-VLAN routing setup.)</p>
     <h2 class="underline">6. Static IP Address to DMZ and Server Group</h2>
