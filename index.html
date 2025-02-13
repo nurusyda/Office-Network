@@ -125,10 +125,77 @@
 <a href="../index.html" class="nav-button">
     <span class="icon">⬅️</span> Previous Page
 </a>
-            <h1 class="underline">Office Network: VLAN, Port Security, AAA, RADIUS, and Network Monitoring</h1>
-    <h2>
-    <a href="https://nurusyda.github.io/Office-Network/HSRP/">
-        HSRP in Edge Router Detailed
-    </a>
-</h2>
+<h1>Office Network</h1>
+    <h2>1. Overview</h2>
+    <ol>
+        <li>
+            <p>Cytonn Ltd, with 600 devices, is preparing to move to a new building consisting of three floors. The building will house five departments and is equipped with:</p>
+            <ul>
+                <li>Two internet service providers for redundancy</li>
+                <li>Two Cisco ASA 5500-X series firewalls</li>
+                <li>Two Cisco Catalyst 3850 48-port Layer 3 switches</li>
+                <li>Seven Cisco Catalyst 2960 48-port switches</li>
+                <li>One Cisco Wireless LAN Controller (WLC)</li>
+                <li>Lightweight Access Points (LAPs) deployed in each department</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Core Infrastructure</h3>
+            <ul>
+                <li>Layer 3 switching with OSPF routing</li>
+                <li>High availability through HSRP configuration</li>
+                <li>EtherChannel load balancing setup</li>
+                <li>Dual ISP connectivity with failover</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Security Architecture</h3>
+            <ul>
+                <li>VLAN segmentation (MGT, LAN, WLAN, DMZ)</li>
+                <li>Cisco ASA firewall configuration</li>
+                <li>ACL implementation and security zones</li>
+                <li>RADIUS authentication integration</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Advanced Features</h3>
+            <ul>
+                <li>Subnetting design</li>
+                <li>DMZ services configuration</li>
+                <li>Enterprise wireless deployment</li>
+                <li>Network monitoring and management</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>2. Network Topology</h2>
+    <p><strong>&lt;Image&gt; Network Topology &lt;Image&gt;</strong></p>
+
+    <h2>3. Switch Configuration</h2>
+    <ol>
+        <li>Basic Setting, SSH, and Standard ACL for SSH to All Switches</li>
+        <li>VLAN assignment, access and trunk setting to All Switches</li>
+        <li>STP Portfast and BPDU guard configuration on all access ports</li>
+        <li>EtherChannel (Load Balancer)</li>
+    </ol>
+
+    <h2>4. Subnetting and IP Addressing</h2>
+    <p><strong>&lt;table&gt; Subnetting Tables &lt;/table&gt;</strong></p>
+
+    <h2>5. HSRP, Inter-VLAN Routing, and IP DHCP Helper Address</h2>
+    <h2>6. Static IP Address to DMZ and Server Group</h2>
+    <h2>7. DHCP Server Device Configuration</h2>
+    <h2>8. OSPF on Routers and Core Switches</h2>
+
+    <h2>9. Firewalls Setting</h2>
+    <p><strong>&lt;Image&gt; Diagram flow of firewall interfaces &lt;Image&gt;</strong></p>
+    <ol>
+        <li>Interface Security Zones and Levels</li>
+        <li>OSPF and Static Routes</li>
+        <li>Inspection Policy Configuration</li>
+        <li>Network Configuration</li>
+    </ol>
+
+    <h2>10. WLAN Configuration</h2>
+
 </body>
