@@ -139,7 +139,7 @@
     <h2 class="underline">2. Network Topology</h2>
     <p><strong>&lt;Image&gt; Network Topology &lt;Image&gt;</strong></p>
 
-   <h2 class="underline">3. Core Infrastructure</h2>
+       <h3>a. Core Infrastructure</h3>
             <ul>
                 <li>Layer 3 switching with OSPF routing</li>
                 <li>High availability through HSRP configuration</li>
@@ -147,21 +147,21 @@
                 <li>Dual ISP connectivity with failover</li>
             </ul>
     
-   <h2 class="underline">4. Security Architecture</h2>
+       <h3>b. Security Architecture</h3>
             <ul>
                 <li>VLAN segmentation (MGT, LAN, WLAN, DMZ)</li>
                 <li>Cisco ASA firewall configuration</li>
                 <li>ACL implementation and security zones</li>
                 <li>RADIUS authentication integration</li>
             </ul>
-  <h2 class="underline">5. Advanced Features</h2>
+      <h3>c. Advanced Features</h3>
             <ul>
                 <li>Subnetting design</li>
                 <li>DMZ services configuration</li>
                 <li>Enterprise wireless deployment</li>
                 <li>Network monitoring and management</li>
             </ul>
-    <h2 class="underline">6. Switch Configuration</h2>
+    <h2 class="underline">3. Switch Configuration</h2>
     <p>diagram or screenshot of switch configurations, such as VLAN assignments, trunk ports, and EtherChannel setup.</p>
     <ol>
         <h3>a. Basic Setting, SSH, and Standard ACL for SSH to All Switches</h3>
@@ -338,19 +338,50 @@ exit
 do wr  
         </code></pre>
     </ol>
-    <h2 class="underline">7. Subnetting and IP Addressing</h2>
+    <h2 class="underline">4. Subnetting and IP Addressing</h2>
     <p><strong>&lt;table&gt; Subnetting Tables &lt;/table&gt;</strong></p>
-
-    <h2 class="underline">8. HSRP, Inter-VLAN Routing, and IP DHCP Helper Address</h2>
+<table>
+    <tr>
+        <th>Category</th>
+        <th>Network & Subnet Mask</th>
+        <th>Default Gateway</th>
+    </tr>
+    <tr>
+        <th>Management</th>
+        <th>192.168.10.0/24</th>
+        <th>192.168.0.1</th>
+    </tr>
+    <tr>
+        <th>LAN</th>
+        <th>172.16.0.0/16</th>
+        <th>172.16.0.1</th>
+    </tr>
+    <tr>
+        <th>WLAN</th>
+        <th>10.20.0.0/16</th>
+        <th>10.20.0.1</th>
+    </tr>
+    <tr>
+        <th>DMZ</th>
+        <th>10.11.11.0/27</th>
+        <th>10.11.11.1</th>
+    </tr>
+    <tr>
+        <th>Inside Servers</th>
+        <th>10.11.11.32/27</th>
+        <th>10.11.11.33</th>
+    </tr>
+</table>
+    <h2 class="underline">5. HSRP, Inter-VLAN Routing, and IP DHCP Helper Address</h2>
     <p>diagram or screenshot showing HSRP configuration and inter-VLAN routing setup.)</p>
-    <h2 class="underline">9. Static IP Address to DMZ and Server Group</h2>
+    <h2 class="underline">6. Static IP Address to DMZ and Server Group</h2>
     <p>table or diagram showing static IP assignments for DMZ and server groups.</p>
-    <h2 class="underline">10. DHCP Server Device Configuration</h2>
+    <h2 class="underline">7. DHCP Server Device Configuration</h2>
     <p>screenshot or configuration snippet of the DHCP server setup</p>
-    <h2 class="underline">11. OSPF on Routers and Core Switches</h2>
+    <h2 class="underline">8. OSPF on Routers and Core Switches</h2>
     <p>diagram or screenshot showing OSPF configuration on routers and core switches.</p>
 
-    <h2 class="underline">12. Firewalls Setting</h2>
+    <h2 class="underline">9. Firewalls Setting</h2>
     <p>screenshots or diagrams of firewall configurations, such as security zones, OSPF routes, and inspection policies.</p>
     <ol>
         <h3>a. Interface Security Zones and Levels</h3>
