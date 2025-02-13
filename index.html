@@ -89,42 +89,42 @@
     padding-bottom: 5px; /* Adds spacing between text and line */
     margin-bottom: 15px; /* Adds space below the line */
         }
-            .nav-button {
+    .nav-button {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 10px 20px;
-        background-color: #f8f9f9;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+        gap: 5px;
+        padding: 5px 12px;
+        background-color: #f0f4f8;
+        border: 1px solid #ccc;
+        border-radius: 3px;
         color: #0366d6;
-        text-decoration: none;
+        font-size: 14px;
         font-weight: 500;
-        font-size: 16px;
-        transition: background-color 0.2s ease;
-        margin-bottom: 20px;
-    }
-    
-    .nav-button:hover {
-        background-color: #f1f1f1;
         text-decoration: none;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        margin: 10px;
     }
-    
-    .icon {
-        font-size: 18px; /* Adjust the size of the icons */
-    }
-      </style>
-</head>
-<body>
-<!-- Back to Main Page -->
-<a href="/index.html" class="nav-button">
-    <span class="icon">🏠</span> Main Page
-</a>
 
-<!-- Back to Previous Page -->
-<a href="../index.html" class="nav-button">
-    <span class="icon">⬅️</span> Previous Page
-</a>
+    .nav-button:hover {
+        background-color: #e6ebf1;
+        transform: translateY(-2px);
+    }
+
+    .icon {
+        font-size: 14px;
+    }
+</style>
+
+<body>
+    <!-- Back to Main Page -->
+    <a href="/index.html" class="nav-button">
+        <span class="icon">🏠</span> Main Page
+    </a>
+
+    <!-- Back to Previous Page -->
+    <a href="../index.html" class="nav-button">
+        <span class="icon">⬅️</span> Previous Page
+    </a>
 <h1 class="underline">Office Network</h1>
     <h2 class="underline">1. Overview</h2>
     <p>Cytonn Ltd, with 600 devices, is preparing to move to a new building consisting of three floors. The building will house five departments and is equipped with:</p>
