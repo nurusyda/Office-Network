@@ -364,8 +364,13 @@ do sh vlan
         </pre>
     </div>
 </div>
-    <img src="images/VLAN.png"/>
-        <p></p>
+<figure>
+    <img src="VLAN.png">
+    <figcaption class="figure-caption">
+        <strong>Figure 2: VLAN Display on one of Cisco Switches</strong><br>
+        <em>Description: Screenshot showing the output of the <code>do show vlan</code> command from a Cisco 2960 switch, displaying the configured VLANs (VLANs 10, 20, and 30) and their corresponding names and statuses.</em>
+    </figcaption>
+</figure>
         <h3>c. STP Portfast and BPDU guard configuration on all access ports</h3>
 <div class="container">
     <div class="box">
@@ -401,7 +406,13 @@ do wr
         </pre>
     </div>
 </div>
-
+<figure>
+    <img src="Spanning-Tree.png" alt="Spanning Tree Configuration on Access Ports">
+    <figcaption class="figure-caption">
+        <strong>Figure 3: Spanning Tree Configuration on Access Ports</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show spanning-tree</code> command. All access ports are configured with PortFast and BPDU Guard, ensuring faster convergence and protection against BPDU-related loops.</em>
+    </figcaption>
+</figure>
         <h3>d. EtherChannel (Load Balancer)</h3>
 <div class="container">
     <div class="box">
@@ -430,6 +441,13 @@ do wr
         </pre>
     </div>
 </div>
+    <figure>
+    <img src="LCAP.png" alt="EtherChannel Configuration Verification on Layer 3 Core Switch 1">
+    <figcaption class="figure-caption">
+        <strong>Figure 4: EtherChannel (Load Balancer) Configuration on Layer 3 Core Switch 1</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show etherchannel summary</code> command. Ports gig1/0/9-11 are bundled into Port-Channel 1 in trunk mode using LACP (mode active), providing link aggregation and load balancing.</em>
+    </figcaption>
+</figure>
     </ol>
     <h2 class="underline">4. Subnetting and IP Addressing</h2>
 <table>
