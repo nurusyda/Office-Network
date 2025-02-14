@@ -139,6 +139,21 @@
         border-radius: 4px;
         margin-top: 20px;
     }
+    .figure-caption {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .figure-caption strong {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .figure-caption em {
+        font-style: italic;
+        color: #555;
+    }
 </style>
 
 <body>
@@ -163,8 +178,13 @@
                <li>Lightweight Access Points (LAPs) deployed in each department</li>
         </ul>
     <h2 class="underline">2. Network Topology</h2>
-    <img src="images/Network-Topology.png"/>
-    <p><strong>&lt;Image&gt; Network Topology &lt;Image&gt;</strong></p>
+    <figure>
+        <img src="images/Network-Topology.png"/>
+        <figcaption class="figure-caption">
+            <strong>Figure 1: Network Topology Diagram</strong><br>
+            <em>Description: The diagram illustrates the physical and logical layout of the network, including firewalls, switches, routers, WLC, LAPs, VLANs, and dual ISP connections. Key components are labeled for clarity.</em>
+        </figcaption>
+    </figure>
     <ol>
        <h3>a. Core Infrastructure</h3>
             <ul>
@@ -344,6 +364,8 @@ do sh vlan
         </pre>
     </div>
 </div>
+    <img src="images/VLAN.png"/>
+        <p></p>
         <h3>c. STP Portfast and BPDU guard configuration on all access ports</h3>
 <div class="container">
     <div class="box">
