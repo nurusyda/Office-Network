@@ -222,7 +222,7 @@ do wr
         <h3>b. VLAN assignment, access and trunk setting to All Switches</h3>
 <div class="container">
     <div class="box">
-        <h4>i. Inter-Department Switches</h4>
+        <h4>Inter-Department Switches</h4>
         <pre>
 vlan 10  
  name MGT  
@@ -268,7 +268,7 @@ do sh vlan
     </div>
 
     <div class="box">
-        <h4>ii. Data Center Switch</h4>
+        <h4>Data Center Switch</h4>
         <pre>
 vlan 10  
  name MGT  
@@ -304,12 +304,8 @@ do sh vlan
     </div>
 
     <div class="box">
-        <h4>iii. Layer 3 Core Switches</h4>
+        <h4>Layer 3 Core Switches</h4>
         <pre>
-interface range gig1/0/3-8  
- switchport mode trunk  
-exit  
-
 vlan 10  
  name MGT  
 vlan 20  
@@ -322,6 +318,10 @@ vlan 90
  name INSIDE-SERVER  
 exit  
 
+interface range gig1/0/3-8  
+ switchport mode trunk  
+exit  
+            
 do wr  
 
 ! Check VLAN Configuration  
@@ -330,48 +330,69 @@ do sh vlan
     </div>
 </div>
         <h3>c. STP Portfast and BPDU guard configuration on all access ports</h3>
-        <pre><code>
-! Inter-Department Switches  
-interface range fa0/3-24  
- spanning-tree portfast  
- spanning-tree bpduguard enable  
-exit  
-do wr  
+<div class="container">
+    <div class="box">
+        <h4>Inter-Department Switches</h4>
+        <pre>
+interface range fa0/3-24
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+exit
+do wr
+        </pre>
+    </div>
 
-! Data Center Switch  
-interface range fa0/3-6, fa0/8-24  
- spanning-tree portfast  
- spanning-tree bpduguard enable  
-exit  
-do wr  
+    <div class="box">
+        <h4>Data Center Switch</h4>
+        <pre>
+interface range fa0/3-6, fa0/8-24
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+exit
+do wr
+        </pre>
+    </div>
 
-! Demilitarized Zone (DMZ) Switch  
-interface range fa0/1-24  
- spanning-tree portfast  
- spanning-tree bpduguard enable  
-exit  
-do wr  
-        </code></pre>
+    <div class="box">
+        <h4>Demilitarized Zone (DMZ) Switch</h4>
+        <pre>
+interface range fa0/1-24
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+exit
+do wr
+        </pre>
+    </div>
+</div>
+
         <h3>d. EtherChannel (Load Balancer)</h3>
-        <pre><code>
-! Layer 3 Core Switch 1  
-interface range gig1/0/9-11  
- channel-group 1 mode active  
-exit  
-interface port-channel 1  
- switchport mode trunk  
-exit  
-do wr  
+<div class="container">
+    <div class="box">
+        <h4>Layer 3 Core Switch 1</h4>
+        <pre>
+interface range gig1/0/9-11
+ channel-group 1 mode active
+exit
+interface port-channel 1
+ switchport mode trunk
+exit
+do wr
+        </pre>
+    </div>
 
-! Layer 3 Core Switch 2  
-interface range gig1/0/9-11  
- channel-group 1 mode passive  
-exit  
-interface port-channel 1  
- switchport mode trunk  
-exit  
-do wr  
-        </code></pre>
+    <div class="box">
+        <h4>Layer 3 Core Switch 2</h4>
+        <pre>
+interface range gig1/0/9-11
+ channel-group 1 mode passive
+exit
+interface port-channel 1
+ switchport mode trunk
+exit
+do wr
+        </pre>
+    </div>
+</div>
     </ol>
     <h2 class="underline">4. Subnetting and IP Addressing</h2>
 <table>
@@ -418,8 +439,9 @@ do wr
         <td>10.11.11.33</td>
     </tr>
 </table>
-    <code><pre>
-! Layer 3 Core Switch 1
+<div class="config-box">
+    <h4>Layer 3 Core Switch 1</h4>
+    <pre>
 ip routing
 interface gig1/0/1
  no switchport
@@ -431,9 +453,13 @@ interface gig1/0/2
  no shutdown
  ip address 10.2.2.5 255.255.255.252
  exit
- do wr
-        
-! Layer 3 Core Switch 2
+do wr
+    </pre>
+</div>
+
+<div class="config-box">
+    <h4>Layer 3 Core Switch 2</h4>
+    <pre>
 ip routing
 interface gig1/0/1
  no switchport
@@ -445,71 +471,66 @@ interface gig1/0/2
  no shutdown
  ip address 10.2.2.13 255.255.255.252
  exit
- do wr
-        
-! ISP 1 (Indihome)
+do wr
+    </pre>
+</div>
+
+<div class="config-box">
+    <h4>ISP 1 (Indihome)</h4>
+    <pre>
 interface gig0/0
  ip address 105.100.50.1 255.255.255.252
  no shutdown
  exit
-
 interface gig0/1
  ip address 105.100.50.5 255.255.255.252
  no shutdown
  exit
-
 interface gig0/2
  ip address 20.20.20.1 255.255.255.252
  no shutdown
  exit
 do wr
-        
-! ISP 2 (Fristmedia)
+    </pre>
+</div>
+
+<div class="config-box">
+    <h4>ISP 2 (Fristmedia)</h4>
+    <pre>
 interface gig0/0
  ip address 197.200.100.1 255.255.255.252
  no shutdown
  exit
-
 interface gig0/1
  ip address 197.200.100.5 255.255.255.252
  no shutdown
  exit
-
 interface gig0/2
  ip address 30.30.30.1 255.255.255.252
  no shutdown
  exit
- do wr
+do wr
+    </pre>
+</div>
 
-! Cloud
+<div class="config-box">
+    <h4>Cloud</h4>
+    <pre>
 interface gig0/0
  ip address 20.20.20.2 255.255.255.252
  no shutdown
  exit
-
 interface gig0/1
  ip address 30.30.30.2 255.255.255.252
  no shutdown
  exit
- 
 interface gig0/2
  ip address 8.0.0.1 255.0.0.0
  no shutdown
  exit
- do wr
-
-! USA
-IPv4 address: 8.0.0.10
-subnet mask: 255.0.0.0
-default gateway: 8.0.0.1
-DNS server: 8.0.0.1
-
-! Canada
-IPv4 address: 8.0.0.20
-subnet mask: 255.0.0.0
-default gateway: 8.0.0.1
-DNS server: 8.0.0.1
-    </pre></code>
+do wr
+    </pre>
+</div>
     <h2 class="underline">5. HSRP, Inter-VLAN Routing, and IP DHCP Helper Address</h2>
     <p>diagram or screenshot showing HSRP configuration and inter-VLAN routing setup.)</p>
 <div class="container">
@@ -572,7 +593,7 @@ interface Vlan90
     <p>table or diagram showing static IP assignments for DMZ and server groups.</p>
     <table>
         <tr>
-            <th>Server Services</th>
+            <th>Devices/Services</th>
             <th>IPv4 Address</th>
             <th>Subnet Mask</th>
             <th>Default Gateway</th>
@@ -631,6 +652,20 @@ interface Vlan90
             <td>255.255.255.224</td>
             <td>10.11.11.1</td>
             <td>10.11.11.37</td>
+        </tr>
+        <tr>
+            <td>USA PC</td>
+            <td>8.0.0.10</td>
+            <td>255.0.0.0</td>
+            <td>8.0.0.1</td>
+            <td>8.0.0.1</td>
+        </tr>
+        <tr>
+            <td>Canada PC</td>
+            <td>8.0.0.20</td>
+            <td>255.0.0.0</td>
+            <td>8.0.0.1</td>
+            <td>8.0.0.1</td>
         </tr>
     </table>
     <h2 class="underline">7. DHCP Server Device Configuration</h2>
@@ -698,6 +733,9 @@ router ospf 35
  network 10.11.11.32 0.0.0.31 area 0
  exit
 do write
+
+show ip ospf neighbor
+show ip route ospf
         </pre>
     </div>
 
@@ -714,6 +752,9 @@ router ospf 35
  network 10.11.11.32 0.0.0.31 area 0
  exit
 do write
+
+show ip ospf neighbor
+show ip route ospf
         </pre>
     </div>
 
@@ -727,6 +768,9 @@ router ospf 35
  network 20.20.20.0 0.0.0.3 area 0
  exit
 do write
+
+show ip ospf neighbor
+show ip route ospf
         </pre>
     </div>
 
@@ -740,6 +784,9 @@ router ospf 35
  network 192.200.100.4 0.0.0.3 area 0
  exit
 do write
+
+show ip ospf neighbor
+show ip route ospf
         </pre>
     </div>
 
@@ -753,6 +800,9 @@ router ospf 35
  network 30.30.30.0 0.0.0.3 area 0
  exit
 do write
+
+show ip ospf neighbor
+show ip route ospf
         </pre>
     </div>
 </div>
