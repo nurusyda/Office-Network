@@ -131,6 +131,14 @@
         border-bottom: 1px solid #ddd;
         padding-bottom: 5px;
     }
+    .notes {
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        color: #856404;
+        padding: 12px;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
 </style>
 
 <body>
@@ -1017,5 +1025,51 @@ wr mem
     </ol>
     <h2 class="underline">13. WLAN Configuration</h2>
     <p>diagram or screenshot of the WLAN configuration, including SSIDs, VLANs, and access point placements.</p>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>IPv4 Address</th>
+            <th>Subnet Mask</th>
+            <th>Default Gateway</th>
+            <th>DNS Server</th>
+            <th>Additional Info</th>
+        </tr>
+        <tr>
+            <td>WLC</td>
+            <td>10.20.0.10</td>
+            <td>255.255.0.0</td>
+            <td>10.20.0.1</td>
+            <td>10.11.11.37</td>
+            <td>
+                URL: http://10.20.0.10<br>
+                Username: admin<br>
+                Password: C1sc0C1sc0
+            </td>
+        </tr>
+        <tr>
+            <td>Management PC</td>
+            <td>10.20.0.100</td>
+            <td>255.255.0.0</td>
+            <td>10.20.0.1</td>
+            <td>10.11.11.37</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>LAP</td>
+            <td>DHCP</td>
+            <td>DHCP</td>
+            <td>10.20.0.1</td>
+            <td>10.11.11.37</td>
+            <td>Recommended IP range:<br>10.20.0.50-10.20.0.99</td>
+        </tr>
+    </table>
 
+    <div class="notes">
+        <strong>Important Notes:</strong>
+        <ul>
+            <li>Configure DHCP Option 43 for WLC discovery by LAPs</li>
+            <li>All devices are in the same subnet (10.20.0.0/16)</li>
+            <li>DNS server is in a different subnet (10.11.x.x)</li>
+        </ul>
+    </div>
 </body>
