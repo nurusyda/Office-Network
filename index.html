@@ -115,6 +115,7 @@
     }
     .container {
         display: flex;
+        flex-wrap: wrap;
         gap: 20px;
     }
     .box {
@@ -439,9 +440,10 @@ do wr
         <td>10.11.11.33</td>
     </tr>
 </table>
-<div class="config-box">
-    <h4>Layer 3 Core Switch 1</h4>
-    <pre>
+<div class="container">
+    <div class="box">
+        <h4>Layer 3 Core Switch 1</h4>
+        <pre>
 ip routing
 interface gig1/0/1
  no switchport
@@ -457,7 +459,7 @@ do wr
     </pre>
 </div>
 
-<div class="config-box">
+   <div class="box">
     <h4>Layer 3 Core Switch 2</h4>
     <pre>
 ip routing
@@ -475,7 +477,7 @@ do wr
     </pre>
 </div>
 
-<div class="config-box">
+   <div class="box">
     <h4>ISP 1 (Indihome)</h4>
     <pre>
 interface gig0/0
@@ -494,7 +496,7 @@ do wr
     </pre>
 </div>
 
-<div class="config-box">
+   <div class="box">
     <h4>ISP 2 (Fristmedia)</h4>
     <pre>
 interface gig0/0
@@ -513,7 +515,7 @@ do wr
     </pre>
 </div>
 
-<div class="config-box">
+   <div class="box">
     <h4>Cloud</h4>
     <pre>
 interface gig0/0
@@ -532,7 +534,7 @@ do wr
     </pre>
 </div>
     <h2 class="underline">5. HSRP, Inter-VLAN Routing, and IP DHCP Helper Address</h2>
-    <p>diagram or screenshot showing HSRP configuration and inter-VLAN routing setup.)</p>
+    <p>diagram or screenshot showing HSRP configuration and inter-VLAN routing setup.</p>
 <div class="container">
     <div class="box">
         <h4>Layer 3 Core Switch 1</h4>
@@ -602,7 +604,9 @@ interface Vlan90
         <tr>
             <td>DHCP</td>
             <td>10.11.38</td>
-            <td></td>
+            <td>255.255.255.224</td>
+            <td>10.11.11.33</td>
+            <td>10.11.11.37</td>
         </tr>
         <tr>
             <td>DNS</td>
