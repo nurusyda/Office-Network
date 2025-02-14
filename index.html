@@ -648,6 +648,13 @@ interface Vlan90
         </pre>
     </div>
 </div>
+<figure>
+    <img src="images/HSRP.png" alt="HSRP Status on Layer 3 Core Switch 2">
+    <figcaption class="figure-caption">
+        <strong>Figure 5: HSRP Status on Layer 3 Core Switch 2</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show standby brief</code> command. It displays HSRP status, indicating which VLAN interfaces are in the Active and Standby roles for redundancy and gateway failover.</em>
+    </figcaption>
+</figure>
     <h2 class="underline">6. Static IP Address to DMZ and Server Group</h2>
     <p>table or diagram showing static IP assignments for DMZ and server groups.</p>
     <table>
@@ -867,6 +874,28 @@ show ip route ospf
         </pre>
     </div>
 </div>
+<figure>
+    <img src="images/OSPF.png" alt="OSPF Configuration on Layer 3 Core Switch 2">
+    <figcaption class="figure-caption">
+        <strong>Figure 6: OSPF Configuration on Layer 3 Core Switch 2</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show running-config | section router ospf</code> command on Layer 3 Core Switch 2. It displays OSPF process 35 configuration, including the router ID and network statements.</em>
+    </figcaption>
+</figure>
+<figure>
+    <img src="images/OSPF-ip.png" alt="OSPF Neighbor Relationships on ISP IND">
+    <figcaption class="figure-caption">
+        <strong>Figure 7: OSPF Neighbor Relationships from ISP INDHOME</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show ip ospf neighbor</code> command on ISP IND, displaying OSPF neighbor adjacency status and neighbor IDs.</em>
+    </figcaption>
+</figure>
+<figure>
+    <img src="images/OSPF-route.png" alt="OSPF Routing Table on ISP IND">
+    <figcaption class="figure-caption">
+        <strong>Figure 8: OSPF Routing Table from ISP INDHOME</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show ip ospf route</code> command on ISP IND. It lists OSPF routes learned from different areas, indicating the next hops and route types.</em>
+    </figcaption>
+</figure>
+
     <h2 class="underline">9. Firewalls Setting</h2>
     <p>screenshots or diagrams of firewall configurations, such as security zones, OSPF routes, and inspection policies.</p>
     <ol>
@@ -1045,6 +1074,14 @@ wr mem
         </pre>
     </div>
 </div>
+<figure>
+    <img src="images/Inspection-Policy.png" alt="NAT and Inspection Policy Configuration on ASA Firewall 1">
+    <figcaption class="figure-caption">
+        <strong>Figure 9: NAT and Inspection Policy Configuration on ASA Firewall 1</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show running-config nat</code> command on ASA Firewall 1. It displays NAT rules and inspection policies applied for traffic passing through different interfaces, including DMZ, INSIDE, and OUTSIDE zones.</em>
+    </figcaption>
+</figure>
+
         <h3>d. Network Configuration</h3>
 <div class="container">
     <div class="box">
@@ -1074,6 +1111,14 @@ wr mem
         </pre>
     </div>
 </div>
+<figure>
+    <img src="images/Access-List.png" alt="ACL Configuration on ASA Firewall 1">
+    <figcaption class="figure-caption">
+        <strong>Figure 10: Access Control List (ACL) Configuration on ASA Firewall 1</strong><br>
+        <em>Description: Screenshot showing the output of the <code>show access-list</code> command on ASA Firewall 1. It displays the access control entries (ACEs) in the RES access list, allowing ICMP, HTTP (port 80), and DNS traffic (TCP/UDP port 53) on interfaces DMZ, OUTSIDE1, and OUTSIDE2.</em>
+    </figcaption>
+</figure>
+
     </ol>
 <h2 class="underline">10. Port Security Configuration</h2>
 <p>For enhanced network security, port security has been implemented on all access switches.</p>
