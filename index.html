@@ -192,7 +192,10 @@
     <p>diagram or screenshot of switch configurations, such as VLAN assignments, trunk ports, and EtherChannel setup.</p>
     <ol>
         <h3>a. Basic Setting, SSH, and Standard ACL for SSH to All Switches</h3>
-        <pre><code>
+<div class="container">
+    <div class="box">
+        <h4>All Switches</h4>
+        <pre>
 enable  
 config t  
 no ip domain-lookup  
@@ -227,7 +230,9 @@ line vty 0 15
 exit  
 
 do wr  
-        </code></pre>
+        </pre>
+    </div>
+</div>
         <h3>b. VLAN assignment, access and trunk setting to All Switches</h3>
 <div class="container">
     <div class="box">
