@@ -1023,6 +1023,81 @@ wr mem
     </div>
 </div>
     </ol>
+<h2 class="underline">10. Port Security Configuration</h2>
+<p>For enhanced network security, port security has been implemented on all access switches.</p>
+<div class="container">
+    <div class="box">
+        <h4>Access Layer Switches Configuration</h4>
+        <pre>
+interface range fa0/3-24
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky
+ switchport port-security violation restrict
+ switchport port-security aging time 60
+ exit
+do wr
+        </pre>
+    </div>
+</div>
+
+<h2 class="underline">11. AAA and RADIUS Configuration</h2>
+<p>Authentication, Authorization, and Accounting (AAA) with RADIUS server integration for centralized access control.</p>
+<div class="container">
+    <div class="box">
+        <h4>Layer 3 Core Switches</h4>
+        <pre>
+aaa new-model
+aaa authentication login default group radius local
+aaa authorization exec default group radius local
+aaa accounting exec default start-stop group radius
+
+radius server RAD-SRV
+ address ipv4 10.11.11.36 auth-port 1812 acct-port 1813
+ key Str0ngR@diusK3y
+exit
+
+do wr
+        </pre>
+    </div>
+    
+    <div class="box">
+        <h4>ASA Firewalls</h4>
+        <pre>
+aaa-server RADIUS protocol radius
+aaa-server RADIUS (INSIDE) host 10.11.11.36
+ key Str0ngR@diusK3y
+exit
+
+aaa authentication http console RADIUS LOCAL
+aaa authentication ssh console RADIUS LOCAL
+aaa authentication enable console RADIUS LOCAL
+
+do wr
+        </pre>
+    </div>
+</div>
+
+<h2 class="underline">12. Network Monitoring and Management</h2>
+<p>Centralized monitoring setup using SNMP for network visibility and proactive management.</p>
+<div class="container">
+    <div class="box">
+        <h4>All Layer 3 Switches</h4>
+        <pre>
+snmp-server community Str0ngC0mmun1ty RO
+snmp-server location Building-A-Floor-1
+snmp-server contact admin@company.com
+snmp-server enable traps
+snmp-server host 10.11.11.38 version 2c Str0ngC0mmun1ty
+
+logging host 10.11.11.38
+logging trap notifications
+logging source-interface Vlan10
+
+do wr
+        </pre>
+    </div>
+</div>
     <h2 class="underline">13. WLAN Configuration</h2>
     <p>diagram or screenshot of the WLAN configuration, including SSIDs, VLANs, and access point placements.</p>
     <table>
